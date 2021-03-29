@@ -60,10 +60,10 @@ cors.init_app(app)
 # Add users for the example
 with app.app_context():
     db.create_all()
-    if db.session.query(User).filter_by(username='Yasoob').count() < 1:
+    if db.session.query(User).filter_by(username='frauenloop').count() < 1:
         db.session.add(User(
-            username='Yasoob',
-            password=guard.hash_password('strongpassword'),
+            username='frauenloop',
+            password=guard.hash_password('test'),
             roles='admin'
         ))
     db.session.commit()
@@ -118,7 +118,7 @@ def protected():
        $ curl http://localhost:5000/api/protected -X GET \
          -H "Authorization: Bearer <your_token>"
     """
-    return {message: f'protected endpoint (allowed user {flask_praetorian.current_user().username})'}
+    return {'message': f'protected endpoint (allowed user {flask_praetorian.current_user().username})'}
 
 
 # Run the example
